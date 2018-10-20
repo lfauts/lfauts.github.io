@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gitlab安装指南 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gitlab安装指南">
+<meta property="og:url" content="http://yoursite.com/2018/10/15/gitlab安装指南/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-15T13:12:12.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gitlab安装指南">
+<meta name="twitter:description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gitlab安装指南" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/15/gitlab安装指南/" class="article-date">
+  <time datetime="2018-10-15T13:08:11.000Z" itemprop="datePublished">2018-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gitlab安装指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Installation-from-source"><a href="#Installation-from-source" class="headerlink" title="Installation from source"></a>Installation from source</h1><h2 id="Consider-the-Omnibus-package-installation"><a href="#Consider-the-Omnibus-package-installation" class="headerlink" title="Consider the Omnibus package installation"></a>Consider the Omnibus package installation</h2><p>Since an installation from source is a lot of work and error prone we strongly recommend the fast and reliable <a href="https://about.gitlab.com/downloads/" target="_blank" rel="noopener">Omnibus package installation</a> (deb/rpm).</p>
+<p>One reason the Omnibus package is more reliable is its use of Runit to restart any of the GitLab processes in case one crashes.<br>On heavily used GitLab instances the memory usage of the Sidekiq background worker will grow over time.<br>Omnibus packages solve this by <a href="http://docs.gitlab.com/ce/operations/sidekiq_memory_killer.html" target="_blank" rel="noopener">letting the Sidekiq terminate gracefully</a> if it uses too much memory.<br>After this termination Runit will detect Sidekiq is not running and will start it.<br>Since installations from source don’t have Runit, Sidekiq can’t be terminated and its memory usage will grow over time.</p>
+<h2 id="Select-Version-to-Install"><a href="#Select-Version-to-Install" class="headerlink" title="Select Version to Install"></a>Select Version to Install</h2><p>Make sure you view <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md" target="_blank" rel="noopener">this installation guide</a> from the branch (version) of GitLab you would like to install (e.g., <code>11-2-stable</code>).<br>You can select the branch in the version dropdown in the top left corner of GitLab (below the menu bar).</p>
+<p>If the highest number stable branch is unclear please check the <a href="https://about.gitlab.com/blog/" target="_blank" rel="noopener">GitLab Blog</a> for installation guide links by version.</p>
+<h2 id="Important-Notes"><a href="#Important-Notes" class="headerlink" title="Important Notes"></a>Important Notes</h2><p>This guide is long because it covers many cases and includes all commands you need, this is <a href="https://twitter.com/robinvdvleuten/status/424163226532986880" target="_blank" rel="noopener">one of the few installation scripts that actually works out of the box</a>.</p>
+<p>This installation guide was created for and tested on <strong>Debian/Ubuntu</strong> operating systems. Please read <a href="requirements.md">requirements.md</a> for hardware and operating system requirements. If you want to install on RHEL/CentOS we recommend using the <a href="https://about.gitlab.com/downloads/" target="_blank" rel="noopener">Omnibus packages</a>.</p>
+<p>This is the official installation guide to set up a production server. To set up a <strong>development installation</strong> or for many other installation options please see <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/README.md#installation" target="_blank" rel="noopener">the installation section of the readme</a>.</p>
+<p>The following steps have been known to work. Please <strong>use caution when you deviate</strong> from this guide. Make sure you don’t violate any assumptions GitLab makes about its environment. For example many people run into permission problems because they changed the location of directories or run services as the wrong user.</p>
+<p>If you find a bug/error in this guide please <strong>submit a merge request</strong><br>following the<br><a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/CONTRIBUTING.md" target="_blank" rel="noopener">contributing guide</a>.</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>The GitLab installation consists of setting up the following components:</p>
+<ol>
+<li>Packages / Dependencies</li>
+<li>Ruby</li>
+<li>Go</li>
+<li>Node</li>
+<li>System Users</li>
+<li>Database</li>
+<li>Redis</li>
+<li>GitLab</li>
+<li>Nginx</li>
+</ol>
+<h2 id="1-Packages-Dependencies"><a href="#1-Packages-Dependencies" class="headerlink" title="1. Packages / Dependencies"></a>1. Packages / Dependencies</h2><p><code>sudo</code> is not installed on Debian by default. Make sure your system is<br>up-to-date and install it.</p>
+<pre><code># run as root!
+apt-get update -y
+apt-get upgrade -y
+apt-get install sudo -y
+</code></pre><p><strong>Note:</strong> During this installation some files will need to be edited manually. If you are familiar with vim set it as default editor with the commands below. If you are not familiar with vim please skip this and keep using the default editor.</p>
+<pre><code># Install vim and set as default editor
+sudo apt-get install -y vim
+sudo update-alternatives --set editor /usr/bin/vim.basic
+</code></pre><p>Install the required packages (needed to compile Ruby and native extensions to Ruby gems):</p>
+<pre><code>sudo apt-get install -y build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libre2-dev libreadline-dev libncurses5-dev libffi-dev curl openssh-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev logrotate rsync python-docutils pkg-config cmake
+</code></pre><p>Ubuntu 14.04 (Trusty Tahr) doesn’t have the <code>libre2-dev</code> package available, but<br>you can <a href="https://github.com/google/re2/wiki/Install" target="_blank" rel="noopener">install re2 manually</a>.</p>
+<p>If you want to use Kerberos for user authentication, then install libkrb5-dev:</p>
+<pre><code>sudo apt-get install libkrb5-dev
+</code></pre><p><strong>Note:</strong> If you don’t know what Kerberos is, you can assume you don’t need it.</p>
+<p>Make sure you have the right version of Git installed</p>
+<pre><code># Install Git
+sudo apt-get install -y git-core
+
+# Make sure Git is version 2.9.5 or higher
+git --version
+</code></pre><p>Is the system packaged Git too old? Remove it and compile from source.</p>
+<pre><code># Remove packaged Git
+sudo apt-get remove git-core
+
+# Install dependencies
+sudo apt-get install -y libcurl4-openssl-dev libexpat1-dev gettext libz-dev libssl-dev build-essential
+
+# Download and compile from source
+cd /tmp
+curl --remote-name --progress https://www.kernel.org/pub/software/scm/git/git-2.18.0.tar.gz
+echo &apos;94faf2c0b02a7920b0b46f4961d8e9cad08e81418614102898a55f980fa3e7e4  git-2.18.0.tar.gz&apos; | shasum -a256 -c - &amp;&amp; tar -xzf git-2.18.0.tar.gz
+cd git-2.18.0/
+./configure
+make prefix=/usr/local all
+
+# Install into /usr/local/bin
+sudo make prefix=/usr/local install
+
+# When editing config/gitlab.yml (Step 5), change the git -&gt; bin_path to /usr/local/bin/git
+</code></pre><p><strong>Note:</strong> In order to receive mail notifications, make sure to install a mail server. By default, Debian is shipped with exim4 but this <a href="https://github.com/gitlabhq/gitlabhq/issues/4866#issuecomment-32726573" target="_blank" rel="noopener">has problems</a> while Ubuntu does not ship with one. The recommended mail server is postfix and you can install it with:</p>
+<pre><code>sudo apt-get install -y postfix
+</code></pre><p>Then select ‘Internet Site’ and press enter to confirm the hostname.</p>
+<h2 id="2-Ruby"><a href="#2-Ruby" class="headerlink" title="2. Ruby"></a>2. Ruby</h2><p>The Ruby interpreter is required to run GitLab.</p>
+<p><strong>Note:</strong> The current supported Ruby (MRI) version is 2.3.x. GitLab 9.0 dropped<br>support for Ruby 2.1.x.</p>
+<p>The use of Ruby version managers such as <a href="https://rvm.io/" title="RVM Homepage" target="_blank" rel="noopener">RVM</a>, <a href="https://github.com/sstephenson/rbenv" title="rbenv on GitHub" target="_blank" rel="noopener">rbenv</a> or <a href="https://github.com/postmodern/chruby" title="chruby on GitHub" target="_blank" rel="noopener">chruby</a> with GitLab<br>in production, frequently leads to hard to diagnose problems. For example,<br>GitLab Shell is called from OpenSSH, and having a version manager can prevent<br>pushing and pulling over SSH. Version managers are not supported and we strongly<br>advise everyone to follow the instructions below to use a system Ruby.</p>
+<p>Linux distributions generally have older versions of Ruby available, so these<br>instructions are designed to install Ruby from the official source code.</p>
+<p>Remove the old Ruby 1.8 if present:</p>
+<pre><code>sudo apt-get remove ruby1.8
+</code></pre><p>Download Ruby and compile it:</p>
+<pre><code>mkdir /tmp/ruby &amp;&amp; cd /tmp/ruby
+curl --remote-name --progress https://cache.ruby-lang.org/pub/ruby/2.4/ruby-2.4.4.tar.gz
+echo &apos;ec82b0d53bd0adad9b19e6b45e44d54e9ec3f10c  ruby-2.4.4.tar.gz&apos; | shasum -c - &amp;&amp; tar xzf ruby-2.4.4.tar.gz
+cd ruby-2.4.4
+
+./configure --disable-install-rdoc
+make
+sudo make install
+</code></pre><p>Then install the Bundler Gem:</p>
+<pre><code>sudo gem install bundler --no-ri --no-rdoc
+</code></pre><h2 id="3-Go"><a href="#3-Go" class="headerlink" title="3. Go"></a>3. Go</h2><p>Since GitLab 8.0, GitLab has several daemons written in Go. To install<br>GitLab we need a Go compiler. The instructions below assume you use 64-bit<br>Linux. You can find downloads for other platforms at the <a href="https://golang.org/dl" target="_blank" rel="noopener">Go download<br>page</a>.</p>
+<pre><code># Remove former Go installation folder
+sudo rm -rf /usr/local/go
+
+curl --remote-name --progress https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+echo &apos;fa1b0e45d3b647c252f51f5e1204aba049cde4af177ef9f2181f43004f901035  go1.10.3.linux-amd64.tar.gz&apos; | shasum -a256 -c - &amp;&amp; \
+  sudo tar -C /usr/local -xzf go1.10.3.linux-amd64.tar.gz
+sudo ln -sf /usr/local/go/bin/{go,godoc,gofmt} /usr/local/bin/
+rm go1.10.3.linux-amd64.tar.gz
+</code></pre><h2 id="4-Node"><a href="#4-Node" class="headerlink" title="4. Node"></a>4. Node</h2><p>Since GitLab 8.17, GitLab requires the use of Node to compile javascript<br>assets, and Yarn to manage javascript dependencies. The current minimum<br>requirements for these are node &gt;= v6.0.0 and yarn &gt;= v1.2.0. In many distros<br>the versions provided by the official package repositories are out of date, so<br>we’ll need to install through the following commands:</p>
+<pre><code># install node v8.x
+curl --location https://deb.nodesource.com/setup_8.x | sudo bash -
+sudo apt-get install -y nodejs
+
+curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update
+sudo apt-get install yarn
+</code></pre><p>Visit the official websites for <a href="https://nodejs.org/en/download/package-manager/" target="_blank" rel="noopener">node</a> and <a href="https://yarnpkg.com/en/docs/install/" target="_blank" rel="noopener">yarn</a> if you have any trouble with these steps.</p>
+<h2 id="5-System-Users"><a href="#5-System-Users" class="headerlink" title="5. System Users"></a>5. System Users</h2><p>Create a <code>git</code> user for GitLab:</p>
+<pre><code>sudo adduser --disabled-login --gecos &apos;GitLab&apos; git
+</code></pre><h2 id="6-Database"><a href="#6-Database" class="headerlink" title="6. Database"></a>6. Database</h2><p>We recommend using a PostgreSQL database. For MySQL check the<br><a href="database_mysql.md">MySQL setup guide</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: because we need to make use of extensions and concurrent index removal,<br>you need at least PostgreSQL 9.2.</p>
+</blockquote>
+<ol>
+<li><p>Install the database packages:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y postgresql postgresql-client libpq-dev postgresql-contrib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create a database user for GitLab:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql -d template1 -c <span class="string">"CREATE USER git CREATEDB;"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create the <code>pg_trgm</code> extension (required for GitLab 8.6+):</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql -d template1 -c <span class="string">"CREATE EXTENSION IF NOT EXISTS pg_trgm;"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Create the GitLab production database and grant all privileges on database:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u postgres psql -d template1 -c <span class="string">"CREATE DATABASE gitlabhq_production OWNER git;"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Try connecting to the new database with the new user:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -u git -H psql -d gitlabhq_production</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Check if the <code>pg_trgm</code> extension is enabled:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT <span class="literal">true</span> AS enabled</span><br><span class="line">FROM pg_available_extensions</span><br><span class="line">WHERE name = <span class="string">'pg_trgm'</span></span><br><span class="line">AND installed_version IS NOT NULL;</span><br></pre></td></tr></table></figure>
+<p> If the extension is enabled this will produce the following output:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enabled</span><br><span class="line">---------</span><br><span class="line"> t</span><br><span class="line">(1 row)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Quit the database session:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlabhq_production&gt; \q</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="7-Redis"><a href="#7-Redis" class="headerlink" title="7. Redis"></a>7. Redis</h2><p>GitLab requires at least Redis 2.8.</p>
+<p>If you are using Debian 8 or Ubuntu 14.04 and up, then you can simply install<br>Redis 2.8 with:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install redis-server</span><br></pre></td></tr></table></figure>
+<p>If you are using Debian 7 or Ubuntu 12.04, follow the special documentation<br>on <a href="redis.md">an alternate Redis installation</a>. Once done, follow the rest of<br>the guide here.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Configure redis to use sockets</span><br><span class="line">sudo cp /etc/redis/redis.conf /etc/redis/redis.conf.orig</span><br><span class="line"></span><br><span class="line"># Disable Redis listening on TCP by setting &apos;port&apos; to 0</span><br><span class="line">sed &apos;s/^port .*/port 0/&apos; /etc/redis/redis.conf.orig | sudo tee /etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line"># Enable Redis socket for default Debian / Ubuntu path</span><br><span class="line">echo &apos;unixsocket /var/run/redis/redis.sock&apos; | sudo tee -a /etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line"># Grant permission to the socket to all members of the redis group</span><br><span class="line">echo &apos;unixsocketperm 770&apos; | sudo tee -a /etc/redis/redis.conf</span><br><span class="line"></span><br><span class="line"># Create the directory which contains the socket</span><br><span class="line">mkdir /var/run/redis</span><br><span class="line">chown redis:redis /var/run/redis</span><br><span class="line">chmod 755 /var/run/redis</span><br><span class="line"></span><br><span class="line"># Persist the directory which contains the socket, if applicable</span><br><span class="line">if [ -d /etc/tmpfiles.d ]; then</span><br><span class="line">  echo &apos;d  /var/run/redis  0755  redis  redis  10d  -&apos; | sudo tee -a /etc/tmpfiles.d/redis.conf</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># Activate the changes to redis.conf</span><br><span class="line">sudo service redis-server restart</span><br><span class="line"></span><br><span class="line"># Add git to the redis group</span><br><span class="line">sudo usermod -aG redis git</span><br></pre></td></tr></table></figure>
+<h2 id="8-GitLab"><a href="#8-GitLab" class="headerlink" title="8. GitLab"></a>8. GitLab</h2><pre><code># We&apos;ll install GitLab into home directory of the user &quot;git&quot;
+cd /home/git
+</code></pre><h3 id="Clone-the-Source"><a href="#Clone-the-Source" class="headerlink" title="Clone the Source"></a>Clone the Source</h3><pre><code># Clone GitLab repository
+sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 11-2-stable gitlab
+</code></pre><p><strong>Note:</strong> You can change <code>11-2-stable</code> to <code>master</code> if you want the <em>bleeding edge</em> version, but never install master on a production server!</p>
+<h3 id="Configure-It"><a href="#Configure-It" class="headerlink" title="Configure It"></a>Configure It</h3><pre><code># Go to GitLab installation folder
+cd /home/git/gitlab
+
+# Copy the example GitLab config
+sudo -u git -H cp config/gitlab.yml.example config/gitlab.yml
+
+# Update GitLab config file, follow the directions at top of file
+sudo -u git -H editor config/gitlab.yml
+
+# Copy the example secrets file
+sudo -u git -H cp config/secrets.yml.example config/secrets.yml
+sudo -u git -H chmod 0600 config/secrets.yml
+
+# Make sure GitLab can write to the log/ and tmp/ directories
+sudo chown -R git log/
+sudo chown -R git tmp/
+sudo chmod -R u+rwX,go-w log/
+sudo chmod -R u+rwX tmp/
+
+# Make sure GitLab can write to the tmp/pids/ and tmp/sockets/ directories
+sudo chmod -R u+rwX tmp/pids/
+sudo chmod -R u+rwX tmp/sockets/
+
+# Create the public/uploads/ directory
+sudo -u git -H mkdir public/uploads/
+
+# Make sure only the GitLab user has access to the public/uploads/ directory
+# now that files in public/uploads are served by gitlab-workhorse
+sudo chmod 0700 public/uploads
+
+# Change the permissions of the directory where CI job traces are stored
+sudo chmod -R u+rwX builds/
+
+# Change the permissions of the directory where CI artifacts are stored
+sudo chmod -R u+rwX shared/artifacts/
+
+# Change the permissions of the directory where GitLab Pages are stored
+sudo chmod -R ug+rwX shared/pages/
+
+# Copy the example Unicorn config
+sudo -u git -H cp config/unicorn.rb.example config/unicorn.rb
+
+# Find number of cores
+nproc
+
+# Enable cluster mode if you expect to have a high load instance
+# Set the number of workers to at least the number of cores
+# Ex. change amount of workers to 3 for 2GB RAM server
+sudo -u git -H editor config/unicorn.rb
+
+# Copy the example Rack attack config
+sudo -u git -H cp config/initializers/rack_attack.rb.example config/initializers/rack_attack.rb
+
+# Configure Git global settings for git user
+# &apos;autocrlf&apos; is needed for the web editor
+sudo -u git -H git config --global core.autocrlf input
+
+# Disable &apos;git gc --auto&apos; because GitLab already runs &apos;git gc&apos; when needed
+sudo -u git -H git config --global gc.auto 0
+
+# Enable packfile bitmaps
+sudo -u git -H git config --global repack.writeBitmaps true
+
+# Enable push options
+sudo -u git -H git config --global receive.advertisePushOptions true
+
+# Configure Redis connection settings
+sudo -u git -H cp config/resque.yml.example config/resque.yml
+
+# Change the Redis socket path if you are not using the default Debian / Ubuntu configuration
+sudo -u git -H editor config/resque.yml
+</code></pre><p><strong>Important Note:</strong> Make sure to edit both <code>gitlab.yml</code> and <code>unicorn.rb</code> to match your setup.</p>
+<p><strong>Note:</strong> If you want to use HTTPS, see <a href="#using-https">Using HTTPS</a> for the additional steps.</p>
+<h3 id="Configure-GitLab-DB-Settings"><a href="#Configure-GitLab-DB-Settings" class="headerlink" title="Configure GitLab DB Settings"></a>Configure GitLab DB Settings</h3><pre><code># PostgreSQL only:
+sudo -u git cp config/database.yml.postgresql config/database.yml
+
+# MySQL only:
+sudo -u git cp config/database.yml.mysql config/database.yml
+
+# MySQL and remote PostgreSQL only:
+# Update username/password in config/database.yml.
+# You only need to adapt the production settings (first part).
+# If you followed the database guide then please do as follows:
+# Change &apos;secure password&apos; with the value you have given to $password
+# You can keep the double quotes around the password
+sudo -u git -H editor config/database.yml
+
+# PostgreSQL and MySQL:
+# Make config/database.yml readable to git only
+sudo -u git -H chmod o-rwx config/database.yml
+</code></pre><h3 id="Install-Gems"><a href="#Install-Gems" class="headerlink" title="Install Gems"></a>Install Gems</h3><p><strong>Note:</strong> As of bundler 1.5.2, you can invoke <code>bundle install -jN</code> (where <code>N</code> the number of your processor cores) and enjoy the parallel gems installation with measurable difference in completion time (~60% faster). Check the number of your cores with <code>nproc</code>. For more information check this <a href="https://robots.thoughtbot.com/parallel-gem-installing-using-bundler" target="_blank" rel="noopener">post</a>. First make sure you have bundler &gt;= 1.5.2 (run <code>bundle -v</code>) as it addresses some <a href="https://devcenter.heroku.com/changelog-items/411" target="_blank" rel="noopener">issues</a> that were <a href="https://github.com/bundler/bundler/pull/2817" target="_blank" rel="noopener">fixed</a> in 1.5.2.</p>
+<pre><code># For PostgreSQL (note, the option says &quot;without ... mysql&quot;)
+sudo -u git -H bundle install --deployment --without development test mysql aws kerberos
+
+# Or if you use MySQL (note, the option says &quot;without ... postgres&quot;)
+sudo -u git -H bundle install --deployment --without development test postgres aws kerberos
+</code></pre><p><strong>Note:</strong> If you want to use Kerberos for user authentication, then omit <code>kerberos</code> in the <code>--without</code> option above.</p>
+<h3 id="Install-GitLab-Shell"><a href="#Install-GitLab-Shell" class="headerlink" title="Install GitLab Shell"></a>Install GitLab Shell</h3><p>GitLab Shell is an SSH access and repository management software developed specially for GitLab.</p>
+<pre><code># Run the installation task for gitlab-shell (replace `REDIS_URL` if needed):
+sudo -u git -H bundle exec rake gitlab:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true
+
+# By default, the gitlab-shell config is generated from your main GitLab config.
+# You can review (and modify) the gitlab-shell config as follows:
+sudo -u git -H editor /home/git/gitlab-shell/config.yml
+</code></pre><p><strong>Note:</strong> If you want to use HTTPS, see <a href="#using-https">Using HTTPS</a> for the additional steps.</p>
+<p><strong>Note:</strong> Make sure your hostname can be resolved on the machine itself by either a proper DNS record or an additional line in /etc/hosts (“127.0.0.1  hostname”). This might be necessary for example if you set up GitLab behind a reverse proxy. If the hostname cannot be resolved, the final installation check will fail with “Check GitLab API access: FAILED. code: 401” and pushing commits will be rejected with “[remote rejected] master -&gt; master (hook declined)”.</p>
+<p><strong>Note:</strong> GitLab Shell application startup time can be greatly reduced by disabling RubyGems. This can be done in several manners:</p>
+<ul>
+<li>Export <code>RUBYOPT=--disable-gems</code> environment variable for the processes</li>
+<li>Compile Ruby with <code>configure --disable-rubygems</code> to disable RubyGems by default. Not recommended for system-wide Ruby.</li>
+<li>Omnibus GitLab <a href="https://gitlab.com/gitlab-org/omnibus-gitlab/merge_requests/1707" target="_blank" rel="noopener">replaces the <em>shebang</em> line of the <code>gitlab-shell/bin/*</code> scripts</a></li>
+</ul>
+<h3 id="Install-gitlab-workhorse"><a href="#Install-gitlab-workhorse" class="headerlink" title="Install gitlab-workhorse"></a>Install gitlab-workhorse</h3><p>GitLab-Workhorse uses <a href="https://www.gnu.org/software/make/" target="_blank" rel="noopener">GNU Make</a>. The<br>following command-line will install GitLab-Workhorse in <code>/home/git/gitlab-workhorse</code><br>which is the recommended location.</p>
+<pre><code>sudo -u git -H bundle exec rake &quot;gitlab:workhorse:install[/home/git/gitlab-workhorse]&quot; RAILS_ENV=production
+</code></pre><p>You can specify a different Git repository by providing it as an extra parameter:</p>
+<pre><code>sudo -u git -H bundle exec rake &quot;gitlab:workhorse:install[/home/git/gitlab-workhorse,https://example.com/gitlab-workhorse.git]&quot; RAILS_ENV=production
+</code></pre><h3 id="Install-gitlab-pages"><a href="#Install-gitlab-pages" class="headerlink" title="Install gitlab-pages"></a>Install gitlab-pages</h3><p>GitLab-Pages uses <a href="https://www.gnu.org/software/make/" target="_blank" rel="noopener">GNU Make</a>. This step is optional and only needed if you wish to host static sites from within GitLab. The following commands will install GitLab-Pages in <code>/home/git/gitlab-pages</code>. For additional setup steps, please consult the <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/administration/pages/source.md" target="_blank" rel="noopener">administration guide</a> for your version of GitLab as the GitLab Pages daemon can be ran several different ways.</p>
+<pre><code>cd /home/git
+sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-pages.git
+cd gitlab-pages
+sudo -u git -H git checkout v$(&lt;/home/git/gitlab/GITLAB_PAGES_VERSION)
+sudo -u git -H make
+</code></pre><h3 id="Install-Gitaly"><a href="#Install-Gitaly" class="headerlink" title="Install Gitaly"></a>Install Gitaly</h3><pre><code># Fetch Gitaly source with Git and compile with Go
+sudo -u git -H bundle exec rake &quot;gitlab:gitaly:install[/home/git/gitaly]&quot; RAILS_ENV=production
+</code></pre><p>You can specify a different Git repository by providing it as an extra parameter:</p>
+<pre><code>sudo -u git -H bundle exec rake &quot;gitlab:gitaly:install[/home/git/gitaly,https://example.com/gitaly.git]&quot; RAILS_ENV=production
+</code></pre><p>Next, make sure gitaly configured:</p>
+<pre><code># Restrict Gitaly socket access
+sudo chmod 0700 /home/git/gitlab/tmp/sockets/private
+sudo chown git /home/git/gitlab/tmp/sockets/private
+
+# If you are using non-default settings you need to update config.toml
+cd /home/git/gitaly
+sudo -u git -H editor config.toml
+</code></pre><p>For more information about configuring Gitaly see<br><a href="../administration/gitaly">doc/administration/gitaly</a>.</p>
+<h3 id="Initialize-Database-and-Activate-Advanced-Features"><a href="#Initialize-Database-and-Activate-Advanced-Features" class="headerlink" title="Initialize Database and Activate Advanced Features"></a>Initialize Database and Activate Advanced Features</h3><pre><code>sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
+# Type &apos;yes&apos; to create the database tables.
+
+# or you can skip the question by adding force=yes
+sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production force=yes
+
+# When done you see &apos;Administrator account created:&apos;
+</code></pre><p><strong>Note:</strong> You can set the Administrator/root password and e-mail by supplying them in environmental variables, <code>GITLAB_ROOT_PASSWORD</code> and <code>GITLAB_ROOT_EMAIL</code> respectively, as seen below. If you don’t set the password (and it is set to the default one) please wait with exposing GitLab to the public internet until the installation is done and you’ve logged into the server the first time. During the first login you’ll be forced to change the default password.</p>
+<pre><code>sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production GITLAB_ROOT_PASSWORD=yourpassword GITLAB_ROOT_EMAIL=youremail
+</code></pre><h3 id="Secure-secrets-yml"><a href="#Secure-secrets-yml" class="headerlink" title="Secure secrets.yml"></a>Secure secrets.yml</h3><p>The <code>secrets.yml</code> file stores encryption keys for sessions and secure variables.<br>Backup <code>secrets.yml</code> someplace safe, but don’t store it in the same place as your database backups.<br>Otherwise your secrets are exposed if one of your backups is compromised.</p>
+<h3 id="Install-Init-Script"><a href="#Install-Init-Script" class="headerlink" title="Install Init Script"></a>Install Init Script</h3><p>Download the init script (will be <code>/etc/init.d/gitlab</code>):</p>
+<pre><code>sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
+</code></pre><p>And if you are installing with a non-default folder or user copy and edit the defaults file:</p>
+<pre><code>sudo cp lib/support/init.d/gitlab.default.example /etc/default/gitlab
+</code></pre><p>If you installed GitLab in another directory or as a user other than the default you should change these settings in <code>/etc/default/gitlab</code>. Do not edit <code>/etc/init.d/gitlab</code> as it will be changed on upgrade.</p>
+<p>Make GitLab start on boot:</p>
+<pre><code>sudo update-rc.d gitlab defaults 21
+</code></pre><h3 id="Setup-Logrotate"><a href="#Setup-Logrotate" class="headerlink" title="Setup Logrotate"></a>Setup Logrotate</h3><pre><code>sudo cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab
+</code></pre><h3 id="Check-Application-Status"><a href="#Check-Application-Status" class="headerlink" title="Check Application Status"></a>Check Application Status</h3><p>Check if GitLab and its environment are configured correctly:</p>
+<pre><code>sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
+</code></pre><h3 id="Compile-GetText-PO-files"><a href="#Compile-GetText-PO-files" class="headerlink" title="Compile GetText PO files"></a>Compile GetText PO files</h3><pre><code>sudo -u git -H bundle exec rake gettext:compile RAILS_ENV=production
+</code></pre><h3 id="Compile-Assets"><a href="#Compile-Assets" class="headerlink" title="Compile Assets"></a>Compile Assets</h3><pre><code>sudo -u git -H yarn install --production --pure-lockfile
+sudo -u git -H bundle exec rake gitlab:assets:compile RAILS_ENV=production NODE_ENV=production
+</code></pre><h3 id="Start-Your-GitLab-Instance"><a href="#Start-Your-GitLab-Instance" class="headerlink" title="Start Your GitLab Instance"></a>Start Your GitLab Instance</h3><pre><code>sudo service gitlab start
+# or
+sudo /etc/init.d/gitlab restart
+</code></pre><h2 id="9-Nginx"><a href="#9-Nginx" class="headerlink" title="9. Nginx"></a>9. Nginx</h2><p><strong>Note:</strong> Nginx is the officially supported web server for GitLab. If you cannot or do not want to use Nginx as your web server, have a look at the <a href="https://gitlab.com/gitlab-org/gitlab-recipes/" target="_blank" rel="noopener">GitLab recipes</a>.</p>
+<h3 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h3><pre><code>sudo apt-get install -y nginx
+</code></pre><h3 id="Site-Configuration"><a href="#Site-Configuration" class="headerlink" title="Site Configuration"></a>Site Configuration</h3><p>Copy the example site config:</p>
+<pre><code>sudo cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab
+sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
+</code></pre><p>Make sure to edit the config file to match your setup. Also, ensure that you match your paths to GitLab, especially if installing for a user other than the ‘git’ user:</p>
+<pre><code># Change YOUR_SERVER_FQDN to the fully-qualified
+# domain name of your host serving GitLab.
+#
+# Remember to match your paths to GitLab, especially
+# if installing for a user other than &apos;git&apos;.
+#
+# If using Ubuntu default nginx install:
+# either remove the default_server from the listen line
+# or else sudo rm -f /etc/nginx/sites-enabled/default
+sudo editor /etc/nginx/sites-available/gitlab
+</code></pre><p>If you intend to enable GitLab pages, there is a separate Nginx config you need<br>to use. Read all about the needed configuration at the<br><a href="../administration/pages/index.md">GitLab Pages administration guide</a>.</p>
+<p><strong>Note:</strong> If you want to use HTTPS, replace the <code>gitlab</code> Nginx config with <code>gitlab-ssl</code>. See <a href="#using-https">Using HTTPS</a> for HTTPS configuration details.</p>
+<h3 id="Test-Configuration"><a href="#Test-Configuration" class="headerlink" title="Test Configuration"></a>Test Configuration</h3><p>Validate your <code>gitlab</code> or <code>gitlab-ssl</code> Nginx config file with the following command:</p>
+<pre><code>sudo nginx -t
+</code></pre><p>You should receive <code>syntax is okay</code> and <code>test is successful</code> messages. If you receive errors check your <code>gitlab</code> or <code>gitlab-ssl</code> Nginx config file for typos, etc. as indicated in the error message given.</p>
+<h3 id="Restart"><a href="#Restart" class="headerlink" title="Restart"></a>Restart</h3><pre><code>sudo service nginx restart
+</code></pre><h2 id="Done"><a href="#Done" class="headerlink" title="Done!"></a>Done!</h2><h3 id="Double-check-Application-Status"><a href="#Double-check-Application-Status" class="headerlink" title="Double-check Application Status"></a>Double-check Application Status</h3><p>To make sure you didn’t miss anything run a more thorough check with:</p>
+<pre><code>sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+</code></pre><p>If all items are green, then congratulations on successfully installing GitLab!</p>
+<p>NOTE: Supply <code>SANITIZE=true</code> environment variable to <code>gitlab:check</code> to omit project names from the output of the check command.</p>
+<h3 id="Initial-Login"><a href="#Initial-Login" class="headerlink" title="Initial Login"></a>Initial Login</h3><p>Visit YOUR_SERVER in your web browser for your first GitLab login.</p>
+<p>If you didn’t <a href="#initialize-database-and-activate-advanced-features">provide a root password during setup</a>,<br>you’ll be redirected to a password reset screen to provide the password for the<br>initial administrator account. Enter your desired password and you’ll be<br>redirected back to the login screen.</p>
+<p>The default account’s username is <strong>root</strong>. Provide the password you created<br>earlier and login. After login you can change the username if you wish.</p>
+<p><strong>Enjoy!</strong></p>
+<p>You can use <code>sudo service gitlab start</code> and <code>sudo service gitlab stop</code> to start and stop GitLab.</p>
+<h2 id="Advanced-Setup-Tips"><a href="#Advanced-Setup-Tips" class="headerlink" title="Advanced Setup Tips"></a>Advanced Setup Tips</h2><h3 id="Relative-URL-support"><a href="#Relative-URL-support" class="headerlink" title="Relative URL support"></a>Relative URL support</h3><p>See the <a href="relative_url.md">Relative URL documentation</a> for more information on<br>how to configure GitLab with a relative URL.</p>
+<h3 id="Using-HTTPS"><a href="#Using-HTTPS" class="headerlink" title="Using HTTPS"></a>Using HTTPS</h3><p>To use GitLab with HTTPS:</p>
+<ol>
+<li>In <code>gitlab.yml</code>:<ol>
+<li>Set the <code>port</code> option in section 1 to <code>443</code>.</li>
+<li>Set the <code>https</code> option in section 1 to <code>true</code>.</li>
+</ol>
+</li>
+<li>In the <code>config.yml</code> of gitlab-shell:<ol>
+<li>Set <code>gitlab_url</code> option to the HTTPS endpoint of GitLab (e.g. <code>https://git.example.com</code>).</li>
+<li>Set the certificates using either the <code>ca_file</code> or <code>ca_path</code> option.</li>
+</ol>
+</li>
+<li>Use the <code>gitlab-ssl</code> Nginx example config instead of the <code>gitlab</code> config.<ol>
+<li>Update <code>YOUR_SERVER_FQDN</code>.</li>
+<li>Update <code>ssl_certificate</code> and <code>ssl_certificate_key</code>.</li>
+<li>Review the configuration file and consider applying other security and performance enhancing features.</li>
+</ol>
+</li>
+</ol>
+<p>Using a self-signed certificate is discouraged but if you must use it follow the normal directions then:</p>
+<ol>
+<li><p>Generate a self-signed SSL certificate:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/nginx/ssl/</span><br><span class="line">cd /etc/nginx/ssl/</span><br><span class="line">sudo openssl req -newkey rsa:2048 -x509 -nodes -days 3560 -out gitlab.crt -keyout gitlab.key</span><br><span class="line">sudo chmod o-r gitlab.key</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>In the <code>config.yml</code> of gitlab-shell set <code>self_signed_cert</code> to <code>true</code>.</p>
+</li>
+</ol>
+<h3 id="Enable-Reply-by-email"><a href="#Enable-Reply-by-email" class="headerlink" title="Enable Reply by email"></a>Enable Reply by email</h3><p>See the <a href="../administration/reply_by_email.md">“Reply by email” documentation</a> for more information on how to set this up.</p>
+<h3 id="LDAP-Authentication"><a href="#LDAP-Authentication" class="headerlink" title="LDAP Authentication"></a>LDAP Authentication</h3><p>You can configure LDAP authentication in <code>config/gitlab.yml</code>. Please restart GitLab after editing this file.</p>
+<h3 id="Using-Custom-Omniauth-Providers"><a href="#Using-Custom-Omniauth-Providers" class="headerlink" title="Using Custom Omniauth Providers"></a>Using Custom Omniauth Providers</h3><p>See the <a href="../integration/omniauth.md">omniauth integration document</a></p>
+<h3 id="Build-your-projects"><a href="#Build-your-projects" class="headerlink" title="Build your projects"></a>Build your projects</h3><p>GitLab can build your projects. To enable that feature you need GitLab Runners to do that for you.<br>Checkout the <a href="https://about.gitlab.com/gitlab-ci/#gitlab-runner" target="_blank" rel="noopener">GitLab Runner section</a> to install it</p>
+<h3 id="Adding-your-Trusted-Proxies"><a href="#Adding-your-Trusted-Proxies" class="headerlink" title="Adding your Trusted Proxies"></a>Adding your Trusted Proxies</h3><p>If you are using a reverse proxy on a separate machine, you may want to add the<br>proxy to the trusted proxies list. Otherwise users will appear signed in from the<br>proxy’s IP address.</p>
+<p>You can add trusted proxies in <code>config/gitlab.yml</code> by customizing the <code>trusted_proxies</code><br>option in section 1. Save the file and <a href="../administration/restart_gitlab.md">reconfigure GitLab</a><br>for the changes to take effect.</p>
+<h3 id="Custom-Redis-Connection"><a href="#Custom-Redis-Connection" class="headerlink" title="Custom Redis Connection"></a>Custom Redis Connection</h3><p>If you’d like to connect to a Redis server on a non-standard port or on a different host, you can configure its connection string via the <code>config/resque.yml</code> file.</p>
+<pre><code># example
+production:
+  url: redis://redis.example.tld:6379
+</code></pre><p>If you want to connect the Redis server via socket, then use the “unix:” URL scheme and the path to the Redis socket file in the <code>config/resque.yml</code> file.</p>
+<pre><code># example
+production:
+  url: unix:/path/to/redis/socket
+</code></pre><p>Also you can use environment variables in the <code>config/resque.yml</code> file:</p>
+<pre><code># example
+production:
+  url: &lt;%= ENV.fetch(&apos;GITLAB_REDIS_URL&apos;) %&gt;
+</code></pre><h3 id="Custom-SSH-Connection"><a href="#Custom-SSH-Connection" class="headerlink" title="Custom SSH Connection"></a>Custom SSH Connection</h3><p>If you are running SSH on a non-standard port, you must change the GitLab user’s SSH config.</p>
+<pre><code># Add to /home/git/.ssh/config
+host localhost          # Give your setup a name (here: override localhost)
+    user git            # Your remote git user
+    port 2222           # Your port number
+    hostname 127.0.0.1; # Your server name or IP
+</code></pre><p>You also need to change the corresponding options (e.g. <code>ssh_user</code>, <code>ssh_host</code>, <code>admin_uri</code>) in the <code>config\gitlab.yml</code> file.</p>
+<h3 id="Additional-Markup-Styles"><a href="#Additional-Markup-Styles" class="headerlink" title="Additional Markup Styles"></a>Additional Markup Styles</h3><p>Apart from the always supported markdown style there are other rich text files that GitLab can display. But you might have to install a dependency to do so. Please see the <a href="https://github.com/gitlabhq/markup#markups" target="_blank" rel="noopener">github-markup gem readme</a> for more information.</p>
+<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><h3 id="“You-appear-to-have-cloned-an-empty-repository-”"><a href="#“You-appear-to-have-cloned-an-empty-repository-”" class="headerlink" title="“You appear to have cloned an empty repository.”"></a>“You appear to have cloned an empty repository.”</h3><p>If you see this message when attempting to clone a repository hosted by GitLab,<br>this is likely due to an outdated Nginx or Apache configuration, or a missing or<br>misconfigured gitlab-workhorse instance. Double-check that you’ve<br><a href="#3-go">installed Go</a>, <a href="#install-gitlab-workhorse">installed gitlab-workhorse</a>,<br>and correctly <a href="#site-configuration">configured Nginx</a>.</p>
+<h3 id="google-protobuf-“LoadError-lib-x86-64-linux-gnu-libc-so-6-version-GLIBC-2-14’-not-found”"><a href="#google-protobuf-“LoadError-lib-x86-64-linux-gnu-libc-so-6-version-GLIBC-2-14’-not-found”" class="headerlink" title="google-protobuf “LoadError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.14’ not found”"></a>google-protobuf “LoadError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.14’ not found”</h3><p>This can happen on some platforms for some versions of the<br>google-protobuf gem. The workaround is to <a href="google-protobuf.md">install a source-only<br>version of this gem</a>.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/15/gitlab安装指南/" data-id="cjnabkglu0000izzx2xpxw26d" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/15/gitlab安装指南/">gitlab安装指南</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/14/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
