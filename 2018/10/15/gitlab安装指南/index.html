@@ -1,92 +1,188 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>gitlab安装指南 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>gitlab安装指南 | linfeng&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
+<meta name="keywords" content="lfauts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gitlab安装指南">
-<meta property="og:url" content="http://yoursite.com/2018/10/15/gitlab安装指南/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://lfauts.github.io/2018/10/15/gitlab安装指南/index.html">
+<meta property="og:site_name" content="linfeng&#39;s blog">
 <meta property="og:description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2018-10-15T13:12:12.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitlab安装指南">
 <meta name="twitter:description" content="Installation from sourceConsider the Omnibus package installationSince an installation from source is a lot of work and error prone we strongly recommend the fast and reliable Omnibus package installa">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+    
+        <link rel="alternate" type="application/atom+xml" title="linfeng&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
 
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">林峰</h5>
+          <a href="mailto:lfauts@163.com" title="lfauts@163.com" class="mail">lfauts@163.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-gitlab安装指南" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/15/gitlab安装指南/" class="article-date">
-  <time datetime="2018-10-15T13:08:11.000Z" itemprop="datePublished">2018-10-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 class="article-title" itemprop="name">
-      gitlab安装指南
-    </h1>
-  
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/lfauts" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
 
-      </header>
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">gitlab安装指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">gitlab安装指南</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-15T13:08:11.000Z" itemprop="datePublished" class="page-time">
+  2018-10-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Installation-from-source"><a href="#Installation-from-source" class="headerlink" title="Installation from source"></a>Installation from source</h1><h2 id="Consider-the-Omnibus-package-installation"><a href="#Consider-the-Omnibus-package-installation" class="headerlink" title="Consider the Omnibus package installation"></a>Consider the Omnibus package installation</h2><p>Since an installation from source is a lot of work and error prone we strongly recommend the fast and reliable <a href="https://about.gitlab.com/downloads/" target="_blank" rel="noopener">Omnibus package installation</a> (deb/rpm).</p>
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Installation-from-source"><span class="post-toc-number">1.</span> <span class="post-toc-text">Installation from source</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Consider-the-Omnibus-package-installation"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Consider the Omnibus package installation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Select-Version-to-Install"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Select Version to Install</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Important-Notes"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Important Notes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Overview"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Overview</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-Packages-Dependencies"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1. Packages / Dependencies</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Ruby"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">2. Ruby</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Go"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">3. Go</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Node"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">4. Node</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5-System-Users"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">5. System Users</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-Database"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">6. Database</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-Redis"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">7. Redis</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-GitLab"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">8. GitLab</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Clone-the-Source"><span class="post-toc-number">1.12.1.</span> <span class="post-toc-text">Clone the Source</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Configure-It"><span class="post-toc-number">1.12.2.</span> <span class="post-toc-text">Configure It</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Configure-GitLab-DB-Settings"><span class="post-toc-number">1.12.3.</span> <span class="post-toc-text">Configure GitLab DB Settings</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-Gems"><span class="post-toc-number">1.12.4.</span> <span class="post-toc-text">Install Gems</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-GitLab-Shell"><span class="post-toc-number">1.12.5.</span> <span class="post-toc-text">Install GitLab Shell</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-gitlab-workhorse"><span class="post-toc-number">1.12.6.</span> <span class="post-toc-text">Install gitlab-workhorse</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-gitlab-pages"><span class="post-toc-number">1.12.7.</span> <span class="post-toc-text">Install gitlab-pages</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-Gitaly"><span class="post-toc-number">1.12.8.</span> <span class="post-toc-text">Install Gitaly</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Initialize-Database-and-Activate-Advanced-Features"><span class="post-toc-number">1.12.9.</span> <span class="post-toc-text">Initialize Database and Activate Advanced Features</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Secure-secrets-yml"><span class="post-toc-number">1.12.10.</span> <span class="post-toc-text">Secure secrets.yml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Install-Init-Script"><span class="post-toc-number">1.12.11.</span> <span class="post-toc-text">Install Init Script</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Setup-Logrotate"><span class="post-toc-number">1.12.12.</span> <span class="post-toc-text">Setup Logrotate</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Check-Application-Status"><span class="post-toc-number">1.12.13.</span> <span class="post-toc-text">Check Application Status</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Compile-GetText-PO-files"><span class="post-toc-number">1.12.14.</span> <span class="post-toc-text">Compile GetText PO files</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Compile-Assets"><span class="post-toc-number">1.12.15.</span> <span class="post-toc-text">Compile Assets</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Start-Your-GitLab-Instance"><span class="post-toc-number">1.12.16.</span> <span class="post-toc-text">Start Your GitLab Instance</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-Nginx"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">9. Nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Installation"><span class="post-toc-number">1.13.1.</span> <span class="post-toc-text">Installation</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Site-Configuration"><span class="post-toc-number">1.13.2.</span> <span class="post-toc-text">Site Configuration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Test-Configuration"><span class="post-toc-number">1.13.3.</span> <span class="post-toc-text">Test Configuration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Restart"><span class="post-toc-number">1.13.4.</span> <span class="post-toc-text">Restart</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Done"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">Done!</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Double-check-Application-Status"><span class="post-toc-number">1.14.1.</span> <span class="post-toc-text">Double-check Application Status</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Initial-Login"><span class="post-toc-number">1.14.2.</span> <span class="post-toc-text">Initial Login</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Advanced-Setup-Tips"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">Advanced Setup Tips</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Relative-URL-support"><span class="post-toc-number">1.15.1.</span> <span class="post-toc-text">Relative URL support</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Using-HTTPS"><span class="post-toc-number">1.15.2.</span> <span class="post-toc-text">Using HTTPS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Enable-Reply-by-email"><span class="post-toc-number">1.15.3.</span> <span class="post-toc-text">Enable Reply by email</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#LDAP-Authentication"><span class="post-toc-number">1.15.4.</span> <span class="post-toc-text">LDAP Authentication</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Using-Custom-Omniauth-Providers"><span class="post-toc-number">1.15.5.</span> <span class="post-toc-text">Using Custom Omniauth Providers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Build-your-projects"><span class="post-toc-number">1.15.6.</span> <span class="post-toc-text">Build your projects</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Adding-your-Trusted-Proxies"><span class="post-toc-number">1.15.7.</span> <span class="post-toc-text">Adding your Trusted Proxies</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Custom-Redis-Connection"><span class="post-toc-number">1.15.8.</span> <span class="post-toc-text">Custom Redis Connection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Custom-SSH-Connection"><span class="post-toc-number">1.15.9.</span> <span class="post-toc-text">Custom SSH Connection</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Additional-Markup-Styles"><span class="post-toc-number">1.15.10.</span> <span class="post-toc-text">Additional Markup Styles</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Troubleshooting"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">Troubleshooting</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#“You-appear-to-have-cloned-an-empty-repository-”"><span class="post-toc-number">1.16.1.</span> <span class="post-toc-text">“You appear to have cloned an empty repository.”</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#google-protobuf-“LoadError-lib-x86-64-linux-gnu-libc-so-6-version-GLIBC-2-14’-not-found”"><span class="post-toc-number">1.16.2.</span> <span class="post-toc-text">google-protobuf “LoadError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.14’ not found”</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-gitlab安装指南"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">gitlab安装指南</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-15 21:08:11" datetime="2018-10-15T13:08:11.000Z"  itemprop="datePublished">2018-10-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Installation-from-source"><a href="#Installation-from-source" class="headerlink" title="Installation from source"></a>Installation from source</h1><h2 id="Consider-the-Omnibus-package-installation"><a href="#Consider-the-Omnibus-package-installation" class="headerlink" title="Consider the Omnibus package installation"></a>Consider the Omnibus package installation</h2><p>Since an installation from source is a lot of work and error prone we strongly recommend the fast and reliable <a href="https://about.gitlab.com/downloads/" target="_blank" rel="noopener">Omnibus package installation</a> (deb/rpm).</p>
 <p>One reason the Omnibus package is more reliable is its use of Runit to restart any of the GitLab processes in case one crashes.<br>On heavily used GitLab instances the memory usage of the Sidekiq background worker will grow over time.<br>Omnibus packages solve this by <a href="http://docs.gitlab.com/ce/operations/sidekiq_memory_killer.html" target="_blank" rel="noopener">letting the Sidekiq terminate gracefully</a> if it uses too much memory.<br>After this termination Runit will detect Sidekiq is not running and will start it.<br>Since installations from source don’t have Runit, Sidekiq can’t be terminated and its memory usage will grow over time.</p>
 <h2 id="Select-Version-to-Install"><a href="#Select-Version-to-Install" class="headerlink" title="Select Version to Install"></a>Select Version to Install</h2><p>Make sure you view <a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/installation.md" target="_blank" rel="noopener">this installation guide</a> from the branch (version) of GitLab you would like to install (e.g., <code>11-2-stable</code>).<br>You can select the branch in the version dropdown in the top left corner of GitLab (below the menu bar).</p>
 <p>If the highest number stable branch is unclear please check the <a href="https://about.gitlab.com/blog/" target="_blank" rel="noopener">GitLab Blog</a> for installation guide links by version.</p>
@@ -476,101 +572,318 @@ host localhost          # Give your setup a name (here: override localhost)
 <h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><h3 id="“You-appear-to-have-cloned-an-empty-repository-”"><a href="#“You-appear-to-have-cloned-an-empty-repository-”" class="headerlink" title="“You appear to have cloned an empty repository.”"></a>“You appear to have cloned an empty repository.”</h3><p>If you see this message when attempting to clone a repository hosted by GitLab,<br>this is likely due to an outdated Nginx or Apache configuration, or a missing or<br>misconfigured gitlab-workhorse instance. Double-check that you’ve<br><a href="#3-go">installed Go</a>, <a href="#install-gitlab-workhorse">installed gitlab-workhorse</a>,<br>and correctly <a href="#site-configuration">configured Nginx</a>.</p>
 <h3 id="google-protobuf-“LoadError-lib-x86-64-linux-gnu-libc-so-6-version-GLIBC-2-14’-not-found”"><a href="#google-protobuf-“LoadError-lib-x86-64-linux-gnu-libc-so-6-version-GLIBC-2-14’-not-found”" class="headerlink" title="google-protobuf “LoadError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.14’ not found”"></a>google-protobuf “LoadError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.14’ not found”</h3><p>This can happen on some platforms for some versions of the<br>google-protobuf gem. The workaround is to <a href="google-protobuf.md">install a source-only<br>version of this gem</a>.</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/15/gitlab安装指南/" data-id="cjnabkglu0000izzx2xpxw26d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
+        </div>
+
+        <blockquote class="post-copyright">
     
-<nav id="article-nav">
-  
-  
-    <a href="/2018/10/14/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-10-15T13:12:12.159Z" itemprop="dateUpdated">2018-10-15 21:12:12</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/2018/10/15/gitlab安装指南/" target="_blank" rel="external">https://lfauts.github.io/2018/10/15/gitlab安装指南/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://lfauts.github.io">
+            <img src="/img/avatar.jpg" alt="林峰">
+            林峰
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&title=《gitlab安装指南》 — linfeng's blog&pic=https://lfauts.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&title=《gitlab安装指南》 — linfeng's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lfauts.github.io/2018/10/15/gitlab安装指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《gitlab安装指南》 — linfeng's blog&url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&via=https://lfauts.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
     </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/15/Mac环境下安装Gitbook/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Mac环境下安装Gitbook</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/10/14/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
   
 </nav>
 
-  
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            owner: 'LinFeng',
+            repo: 'lfatus.github.com',
+            oauth: {
+                client_id: '',
+                client_secret: '',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
 </article>
 
-</section>
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        您的鼓励使我更加有热情
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li></ul>
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
     </div>
-  </div>
+</div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
         
-          <li>
-            <a href="/2018/10/15/gitlab安装指南/">gitlab安装指南</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/14/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
     </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    <div class="bottom">
+        <p><span>林峰 &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
     </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&title=《gitlab安装指南》 — linfeng's blog&pic=https://lfauts.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&title=《gitlab安装指南》 — linfeng's blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://lfauts.github.io/2018/10/15/gitlab安装指南/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《gitlab安装指南》 — linfeng's blog&url=https://lfauts.github.io/2018/10/15/gitlab安装指南/&via=https://lfauts.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://lfauts.github.io/2018/10/15/gitlab安装指南/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
 
 
-<script src="/js/script.js"></script>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aS47DMAwEUd//0p4TWK4mlQFMlVZBECt6WTDi57rwupdr/Zn1buT9bUuGDBmfZaRHrL2T7sx3kCFDxjmMpwi23poE0HSHp6dezixDhgwZy61vsPhxZciQIaPPWB+I55j8aihDhgwZPFASPDlceqHcnIvLkCHjgwxedf//1z/pb8iQIeNTjDtctQDNj3iXlgwZMmYzeICrIfuNUn71lCFDxlQGSU1rSSNJOGut0IvU3mTIkDGIkRbIUIGeR/p2w+CldihDhowRDF6U5+GYpLtpynqlv6UMGTIGMTqAXSMXJBAXb7syZMgYzUiTWD6i0R+2iP9DZMiQ8XHGL8IlD5H9Yt9jJ1aGDBmDGLWteVk/bQ+QAI3+BmTIkDGIwQMlCXnpRbCfNqNDyJAh4+MMcqBa0zG9bqYlNhkyZJzJqJXjSRjd1bCMb7gyZMgYykgL/bwNyYt0aStChgwZ5zD4AFaa+vY/E5TnZMiQcQCDF93SdmOn6Bbn4jJkyBjHSFPK9MpYTEFxs0GGDBnnMDpJLB/C2DV8FsyJyJAhYzSj9gX9C2LxKRkyZAxl3OFKv6BzuIAqQ4aM0Qy++sltZ6iikwbLkCFjBqMzDMFJpLXQAcuQIeMERjpUUWsS9K99j0gZMmTIWAbc2kBGrWz3kpHLkCFDRqPslVLXz24LuDJkyPgUg4c/frGrtRaKSbIMGTJGM9JwyYNjLTHmQVaGDBkHMP4AATrbGb8eIekAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
 
-  </div>
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '您还会回来吗？';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '欢迎回来';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
 </body>
 </html>
